@@ -196,7 +196,9 @@ img {
   }
   .description {
     background-color: #ccc;
-    display: none;
+    &:not(.first){
+      display: none;
+    }
   }
 }
 /* ?sliderDown */
