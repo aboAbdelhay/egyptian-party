@@ -22,6 +22,31 @@ $(window).on("scroll", function () {
 $("#up").on("click", function () {
   $("html,body").animate({ scrollTop: 0 }, 1000);
 });
+// !=======> navLink click <=======
+$("nav ul li a[href^='#']").on("click", function(event) {
+  event.preventDefault();
+  $("nav ul li a[href^='#']").removeClass("active");
+  $(this).addClass("active");
+  let target = $(this).attr("href");
+  let offsetTop = $(target).offset().top;
+  $("html, body").animate({ scrollTop: offsetTop }, 1000);
+});
+// !=======> navLink scroll <=======
+$(window).on("scroll", function() {
+  let scrollPos = $(window).scrollTop();
+  $("nav ul li a[href^='#']").each(function() {
+      let refElement = $($(this).attr("href"));
+      if (
+          refElement.position().top <= scrollPos &&
+          refElement.position().top + refElement.height() > scrollPos
+      ) {
+          $("nav ul li a").removeClass("active");
+          $(this).addClass("active");
+      } else {
+          $(this).removeClass("active");
+      }
+  });
+});
 // !=======>  <=======
 let isOPen = false;
 $(".menu").on("click", function () {
